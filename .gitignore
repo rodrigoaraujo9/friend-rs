@@ -1,0 +1,10 @@
+/target
+Cargo.lock
+
+.env
+
+models/
+voices/
+tmp/
+
+.DS_Store

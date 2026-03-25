@@ -1,0 +1,15 @@
+[package]
+name = "local-voice-assistant"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+cpal = "0.17"
+hound = "3.5"
+reqwest = { version = "0.12", features = ["json"] }
+rodio = "0.21"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal", "time"] }
+whisper-rs = "0.16"
