@@ -53,7 +53,6 @@ curl --fail --location --output ./voices/en_US-lessac-medium.onnx \
   https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx
 curl --fail --location --output ./voices/en_US-lessac-medium.onnx.json \
   https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx.json
-
 # portuguese setup
 curl --fail --location --output ./models/ggml-base.bin \
   https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin
