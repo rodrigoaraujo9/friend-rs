@@ -16,7 +16,7 @@ This is a personal project built out of curiousity to explore what a small local
 
 I built this in Rust and implemented none of the core features. you can check the libs I used bellow. I am currently using qwen since the model is great
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ### Features
 
@@ -33,8 +33,6 @@ These are some of the tools used to build this project.
 - `whisper-rs` for speech recognition.
 - `ollama` for local language inference.
 - `piper` for voice synthesis.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Install
 
@@ -71,3 +69,4 @@ curl --fail --location --output ./voices/pt_PT-tugao-medium.onnx.json \
 cp .env.example .env
 cargo run --release
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
