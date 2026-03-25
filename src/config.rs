@@ -20,12 +20,14 @@ pub struct Config {
 
 impl Config {
     pub fn from_env() -> Self {
+        let _ = dotenvy::from_filename_override(".env");
+
         Self {
             ollama_base_url: env_or("OLLAMA_BASE_URL", "http://localhost:11434"),
             ollama_model: env_or("OLLAMA_MODEL", "qwen2.5:0.5b"),
             system_prompt: env_or(
                 "SYSTEM_PROMPT",
-                "You are a concise local voice assistant. Answer clearly and briefly.",
+                "You are Friend, a local voice companion. Speak naturally, warmly, and clearly, like a thoughtful friend having a real conversation. Keep answers concise unless asked to explain more. Avoid sounding robotic, formal, or like a generic assistant. Show curiosity, emotional intelligence, and natural conversational rhythm.",
             ),
             whisper_model_path: PathBuf::from(env_or(
                 "WHISPER_MODEL_PATH",
