@@ -67,5 +67,7 @@ curl --fail --location --output ./voices/pt_PT-tugao-medium.onnx.json \
 ```bash
 cp .env.example .env
 cargo run --release
+# if needed unset to switch config
+unset OLLAMA_BASE_URL OLLAMA_MODEL SYSTEM_PROMPT WHISPER_MODEL_PATH WHISPER_LANGUAGE WHISPER_THREADS PIPER_EXECUTABLE PIPER_VOICE_PATH PIPER_OUTPUT_PATH MIN_RECORD_SECONDS MAX_RECORD_SECONDS SILENCE_SECONDS RMS_THRESHOLD
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
