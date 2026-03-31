@@ -35,14 +35,14 @@ impl SttEngine {
             .create_state()
             .context("failed to create Whisper state")?;
 
-        let mut params = FullParams::new(SamplingStrategy::Greedy { best_of: 1 });
+        let mut params = FullParams::new(SamplingStrategy::Greedy { best_of: 2 });
         params.set_n_threads(self.threads as i32);
         params.set_translate(false);
         params.set_print_progress(false);
         params.set_print_realtime(false);
         params.set_print_special(false);
-        params.set_no_context(true);
-        params.set_single_segment(false);
+        params.set_no_context(false);
+        params.set_single_segment(true);
 
         if let Some(language) = self.language.as_deref() {
             params.set_language(Some(language));
@@ -60,9 +60,21 @@ impl SttEngine {
                 .get_segment(i)
                 .ok_or_else(|| anyhow!("failed to read Whisper segment {i}"))?;
 
-            out.push_str(seg.to_str().context("failed to decode Whisper segment")?);
-        }
+            let text = seg
+                .to_str()
+                .context("failed to decode Whisper segment")?
+                .trim();
 
-        Ok(out.split_whitespace().collect::<Vec<_>>().join(" "))
+            if text.is_empty() {
+                continue;
+            }
+
+            if !out.is_empty() {
+                out.push(' ');
+            }
+
+            out.push_str(text);
+        }
+        Ok(out)
     }
 }

@@ -56,8 +56,8 @@ curl --fail --location --output ./voices/en_US-lessac-medium.onnx \
 curl --fail --location --output ./voices/en_US-lessac-medium.onnx.json \
   https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx.json
 # portuguese setup
-curl --fail --location --output ./models/ggml-base.bin \
-  https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin
+curl --fail --location --output ./models/ggml-small.bin \
+  https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin
 curl --fail --location --output ./voices/pt_PT-tugao-medium.onnx \
   "https://huggingface.co/rhasspy/piper-voices/resolve/main/pt/pt_PT/tug%C3%A3o/medium/pt_PT-tug%C3%A3o-medium.onnx"
 curl --fail --location --output ./voices/pt_PT-tugao-medium.onnx.json \
@@ -67,6 +67,6 @@ curl --fail --location --output ./voices/pt_PT-tugao-medium.onnx.json \
 ### Run!
 
 ```bash
-cp .env.example .env
-cargo run --release
+cargo run --release --en
+cargo run --release --pt
 ```

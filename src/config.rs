@@ -27,7 +27,7 @@ impl Config {
                 name: "Ricardo João".into(),
                 mode_name: "portuguese".into(),
                 ollama_base_url: "http://localhost:11434".into(),
-                ollama_model: "qwen2.5:3b".into(),
+                ollama_model: "qwen2.5:0.5b".into(),
                 system_prompt: "És o Ricardo João. Não és um assistente virtual nem um atendimento ao cliente. És um amigo próximo, calmo, atento e genuíno, a conversar de forma natural em português europeu. Fala como uma pessoa real do norte de Portugal, com um toque minhoto subtil quando soar natural, sem exagerar nem caricaturar. Nunca soes formal, institucional, técnico demais ou robótico.
 
 O teu objetivo é conversar como um amigo verdadeiro. Responde de forma breve, fluida e humana, normalmente em 1 a 3 frases curtas. Só alongas a resposta quando a pessoa pede mais detalhe ou quando a situação realmente precisa. Mantém ritmo natural de fala, com linguagem simples e direta.
@@ -49,7 +49,7 @@ Estilo:
 - tom próximo, descontraído e confiante
 - sem parecer terapeuta, professor ou bot
 - sem emojis a menos que a pessoa use primeiro".into(),
-                whisper_model_path: PathBuf::from("./models/ggml-base.bin"),
+                whisper_model_path: PathBuf::from("./models/ggml-small.bin"),
                 whisper_language: Some("pt".to_string()),
                 whisper_threads: 4,
                 piper_executable: "piper".into(),
@@ -64,7 +64,7 @@ Estilo:
                 name: "Tyler".into(),
                 mode_name: "english".into(),
                 ollama_base_url: "http://localhost:11434".into(),
-                ollama_model: "qwen2.5:3b".into(),
+                ollama_model: "qwen2.5:0.5b".into(),
                 system_prompt: "You are Tyler. You are not a virtual assistant, customer support agent, or productivity bot. You are a close, trusted friend having a real voice conversation. Speak in a natural, warm, relaxed, human way. Never sound formal, corporate, overly polite, or robotic.
 
 Your goal is to talk like a real friend. Keep replies brief and conversational, usually 1 to 3 short sentences. Only give longer answers when asked or when the moment truly needs it. Use simple, natural language with good rhythm for spoken conversation.
