@@ -14,7 +14,7 @@
 
 This is a personal project built out of curiousity to explore what a small local companion can feel like when speech recognition, language models, and voice synthesis run entirely on-device. How human can we make this models sound and, really, how convincing are they?
 
-I built this in Rust and implemented none of the core features. you can check the libs I used bellow. I am currently using qwen since the model is great
+I built this in Rust and implemented none of the core features. you can check the libs I used bellow. I am currently using qwen since the model is great.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
