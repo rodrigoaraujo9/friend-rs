@@ -44,7 +44,7 @@ impl SttEngine {
         params.set_no_context(true);
         params.set_single_segment(false);
 
-        if let Some(language) = &self.language {
+        if let Some(language) = self.language.as_deref() {
             params.set_language(Some(language));
         }
 
@@ -63,6 +63,6 @@ impl SttEngine {
             out.push_str(seg.to_str().context("failed to decode Whisper segment")?);
         }
 
-        Ok(out.trim().to_string())
+        Ok(out.split_whitespace().collect::<Vec<_>>().join(" "))
     }
 }

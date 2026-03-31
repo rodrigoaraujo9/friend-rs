@@ -23,7 +23,6 @@ struct CaptureState {
     started: bool,
     finished: bool,
     channels: usize,
-    sample_rate: u32,
     samples: Vec<f32>,
     speech_frames: u64,
     silence_frames: u64,
@@ -113,7 +112,6 @@ pub fn capture_utterance(settings: &CaptureSettings) -> Result<CapturedAudio> {
         started: false,
         finished: false,
         channels,
-        sample_rate,
         samples: Vec::with_capacity(max_frames as usize),
         speech_frames: 0,
         silence_frames: 0,
@@ -130,10 +128,10 @@ pub fn capture_utterance(settings: &CaptureSettings) -> Result<CapturedAudio> {
         SampleFormat::F32 => build_input_stream::<f32>(&device, &config, state.clone(), err_fn)?,
         SampleFormat::I16 => build_input_stream::<i16>(&device, &config, state.clone(), err_fn)?,
         SampleFormat::U16 => build_input_stream::<u16>(&device, &config, state.clone(), err_fn)?,
-        fmt => return Err(anyhow!("unsupported input sample format: {fmt:?}")),
+        other => return Err(anyhow!("unsupported input sample format: {other:?}")),
     };
 
-    println!("Listening... speak now.");
+    println!("listening... speak now.");
     stream.play().context("failed to start input stream")?;
 
     done_rx
@@ -153,7 +151,7 @@ pub fn capture_utterance(settings: &CaptureSettings) -> Result<CapturedAudio> {
 
     Ok(CapturedAudio {
         samples: state.samples,
-        sample_rate: state.sample_rate,
+        sample_rate,
     })
 }
 

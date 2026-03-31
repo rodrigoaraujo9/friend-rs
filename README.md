@@ -16,7 +16,7 @@ This is a personal project built out of curiousity to explore what a small local
 
 I built this in Rust and implemented none of the core features. you can check the libs I used bellow. I am currently using qwen since the model is great
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Features
 
@@ -34,6 +34,8 @@ These are some of the tools used to build this project.
 - `ollama` for local language inference.
 - `piper` for voice synthesis.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Install
 
 ```bash
@@ -43,7 +45,7 @@ brew install pipx
 pipx install piper-tts
 # start Ollama
 ollama serve
-ollama pull qwen2.5:0.5b
+ollama pull pa
 # download models
 mkdir -p models voices tmp
 # english setup
@@ -67,7 +69,4 @@ curl --fail --location --output ./voices/pt_PT-tugao-medium.onnx.json \
 ```bash
 cp .env.example .env
 cargo run --release
-# if needed unset to switch config
-unset OLLAMA_BASE_URL OLLAMA_MODEL SYSTEM_PROMPT WHISPER_MODEL_PATH WHISPER_LANGUAGE WHISPER_THREADS PIPER_EXECUTABLE PIPER_VOICE_PATH PIPER_OUTPUT_PATH MIN_RECORD_SECONDS MAX_RECORD_SECONDS SILENCE_SECONDS RMS_THRESHOLD
 ```
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
