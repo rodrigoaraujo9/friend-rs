@@ -10,9 +10,10 @@ use audio::{capture_utterance, resample_to_16khz_mono, save_wav_mono_16khz, Capt
 use config::Config;
 use memory::ConversationMemory;
 use ollama::OllamaClient;
+use std::path::Path;
+use std::process;
 use std::sync::{Arc, Mutex};
 use stt::SttEngine;
-use tokio::signal;
 use tts::TtsEngine;
 
 #[tokio::main]
@@ -26,6 +27,8 @@ async fn main() -> Result<()> {
     println!("{} is booting up...", cfg.name);
     println!("he speaks {}.", cfg.mode_name);
     println!("press Ctrl+C to quit.\n");
+
+    install_instant_ctrl_c();
 
     let stt = SttEngine::new(
         &cfg.whisper_model_path,
@@ -54,20 +57,18 @@ async fn main() -> Result<()> {
     )));
 
     loop {
-        tokio::select! {
-            _ = signal::ctrl_c() => {
-                println!("\nshutting down.");
-                break;
-            }
-            result = run_turn(&capture, &stt, &ollama, &tts, &memory, &cfg) => {
-                if let Err(err) = result {
-                    eprintln!("error: {err:#}");
-                }
-            }
+        if let Err(err) = run_turn(&capture, &stt, &ollama, &tts, &memory, &cfg).await {
+            eprintln!("error: {err:#}");
         }
     }
+}
 
-    Ok(())
+fn install_instant_ctrl_c() {
+    tokio::spawn(async {
+        let _ = tokio::signal::ctrl_c().await;
+        eprintln!("\nshutting down.");
+        process::exit(130);
+    });
 }
 
 async fn run_turn(
@@ -81,7 +82,7 @@ async fn run_turn(
     let audio = capture_utterance(capture)?;
     let audio_16k = resample_to_16khz_mono(&audio.samples, audio.sample_rate);
 
-    save_wav_mono_16khz(std::path::Path::new("./tmp/last_input.wav"), &audio_16k)
+    save_wav_mono_16khz(Path::new("./tmp/last_input.wav"), &audio_16k)
         .context("failed to write debug input WAV")?;
 
     let transcript = stt.transcribe(&audio_16k)?;
@@ -97,11 +98,6 @@ async fn run_turn(
         memory.push_user(transcript.clone());
         memory.messages_for_model()
     };
-
-    // println!("prompt to ollama (for testing)");
-    // for (i, msg) in messages.iter().enumerate() {
-    //     println!("[{i}] {}: {}", msg.role, msg.content);
-    // }
 
     let reply = ollama.chat(&messages).await?;
     println!("{}: {reply}\n", cfg.name);
